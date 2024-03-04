@@ -18,7 +18,9 @@ import com.example.millionaire.presentation.ui.theme.MillionaireTheme
 
 @Composable
 fun App() {
-    MillionaireTheme {
+    MillionaireTheme(
+        dynamicColor = false
+    ) {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background

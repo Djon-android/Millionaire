@@ -46,6 +46,7 @@ import kotlinx.coroutines.launch
 @ExperimentalMaterial3Api
 @Composable
 fun MainScreen(
+
     navigationToLogin: () -> Unit,
     navigationToRules: () -> Unit,
     navigationToResults: () -> Unit

@@ -94,12 +94,11 @@ fun AppGraph() {
                 navigateToLoginScreen = {
                     navigationState.resetNavigation()
                     navigationState.navigateTo(Screen.LoginScreen.route)
-                },
-                navigateToMainScreen = {
-                    navigationState.resetNavigation()
-
                 }
-            )
+            ) {
+                navigationState.resetNavigation()
+
+            }
         }
     )
 }

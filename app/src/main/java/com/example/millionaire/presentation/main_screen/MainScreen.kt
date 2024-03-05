@@ -13,10 +13,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.icons.Icons
-
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.Button
@@ -33,7 +31,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -43,21 +40,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.millionaire.R
-import com.example.millionaire.presentation.placeholderFunction
 import kotlinx.coroutines.launch
 
 
 @ExperimentalMaterial3Api
 @Composable
-fun MainScreen(navigateToLoginScreen : () ->Unit) {
-    val continueGame by remember{ mutableStateOf(false) }
+fun MainScreen(
+    navigationToLogin: () -> Unit,
+    navigationToRules: () -> Unit,
+    navigationToResults: () -> Unit
+) {
+    val continueGame by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
     var bottomSheetText by remember { mutableStateOf("") }
 
 
-    val buttonYellowGradient =Brush.verticalGradient(
+    val buttonYellowGradient = Brush.verticalGradient(
         colors = listOf(
             Color(0xFFE1CF30), Color(0xFFE19A30),
             Color(0xFFE19A30), Color(0xFFE1CF30)
@@ -69,10 +69,11 @@ fun MainScreen(navigateToLoginScreen : () ->Unit) {
             Color(0xFF020631), Color(0xFF083C66)
         )
     )
-    BottomSheetScaffold(sheetContent = {
-        Text(text = bottomSheetText, modifier = Modifier.padding(16.dp), fontSize = 16.sp)
+    BottomSheetScaffold(
+        sheetContent = {
+            Text(text = bottomSheetText, modifier = Modifier.padding(16.dp), fontSize = 16.sp)
 
-    },
+        },
         scaffoldState = scaffoldState,
         sheetPeekHeight = 0.dp
     ) {
@@ -136,11 +137,11 @@ fun MainScreen(navigateToLoginScreen : () ->Unit) {
                 modifier = Modifier
                     .size(311.dp, 62.dp)
                     .background(
-                        brush =buttonYellowGradient,
+                        brush = buttonYellowGradient,
                         shape = CutCornerShape(50.dp)
                     ),
                 onClick = {
-                    navigateToLoginScreen()
+                    navigationToLogin()
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent, contentColor = Color.White
@@ -155,12 +156,11 @@ fun MainScreen(navigateToLoginScreen : () ->Unit) {
                 modifier = Modifier
                     .size(311.dp, 62.dp)
                     .background(
-                        brush =buttonBlueGradient
-                        ,
+                        brush = buttonBlueGradient,
                         shape = CutCornerShape(50.dp)
                     ),
                 onClick = {
-                          navigateToLoginScreen()
+                    navigationToLogin()
                 },
                 enabled = continueGame,
                 colors = ButtonDefaults.buttonColors(
@@ -193,22 +193,25 @@ fun MainScreen(navigateToLoginScreen : () ->Unit) {
 @Preview
 @ExperimentalMaterial3Api
 @Composable
-fun MainScreenPreview(){
-    MainScreen({ placeholderFunction() })
+fun MainScreenPreview() {
+    MainScreen({}, {}, {})
 }
-val textTeam = "Евгений - evgeny_mobile\nБулат - mezeksan\nШамси - umaq\nНикита - nikita_novikov2308"
-val textRules = "Игра \"Кто хочет стать миллионером\" - это популярная телевизионная игра, основанная на британском формате \"Who Wants to Be a Millionaire?\". В игре участвует один участник, который поочередно отвечает на вопросы и пытается выиграть максимальный денежный приз.\n" +
-        "\n" +
-        "Вот основные правила игры:\n" +
-        "\n" +
-        "Участнику предлагается серия вопросов разной сложности, на каждый из которых предоставляется четыре варианта ответа.\n" +
-        "\n" +
-        "Участник выбирает один из вариантов (или может не выбирать, если ему неизвестен верный ответ) и затем подтверждает свой выбор.\n" +
-        "\n" +
-        "При правильном ответе участник продвигается дальше по игровому дереву, при неправильном ответе он выбывает из игры.\n" +
-        "\n" +
-        "Чем дальше участник продвигается, тем сложнее и ценнее становятся вопросы и призы.\n" +
-        "\n" +
-        "Участник имеет возможность использовать подсказки, такие как \"50/50\" (удаление двух неверных вариантов ответа), \"Звонок другу\" (звонок знакомому для получения совета) и \"Помощь зала\" (опрос аудитории).\n" +
-        "\n" +
-        "Цель участника - дойти до последнего вопроса и выиграть максимальный денежный приз, который обычно является суммой в размере миллиона или другой крупной суммы денег"
+
+val textTeam =
+    "Евгений - evgeny_mobile\nБулат - mezeksan\nШамси - umaq\nНикита - nikita_novikov2308"
+val textRules =
+    "Игра \"Кто хочет стать миллионером\" - это популярная телевизионная игра, основанная на британском формате \"Who Wants to Be a Millionaire?\". В игре участвует один участник, который поочередно отвечает на вопросы и пытается выиграть максимальный денежный приз.\n" +
+            "\n" +
+            "Вот основные правила игры:\n" +
+            "\n" +
+            "Участнику предлагается серия вопросов разной сложности, на каждый из которых предоставляется четыре варианта ответа.\n" +
+            "\n" +
+            "Участник выбирает один из вариантов (или может не выбирать, если ему неизвестен верный ответ) и затем подтверждает свой выбор.\n" +
+            "\n" +
+            "При правильном ответе участник продвигается дальше по игровому дереву, при неправильном ответе он выбывает из игры.\n" +
+            "\n" +
+            "Чем дальше участник продвигается, тем сложнее и ценнее становятся вопросы и призы.\n" +
+            "\n" +
+            "Участник имеет возможность использовать подсказки, такие как \"50/50\" (удаление двух неверных вариантов ответа), \"Звонок другу\" (звонок знакомому для получения совета) и \"Помощь зала\" (опрос аудитории).\n" +
+            "\n" +
+            "Цель участника - дойти до последнего вопроса и выиграть максимальный денежный приз, который обычно является суммой в размере миллиона или другой крупной суммы денег"

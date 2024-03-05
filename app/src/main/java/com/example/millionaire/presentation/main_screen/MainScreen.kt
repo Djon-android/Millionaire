@@ -140,6 +140,7 @@ fun MainScreen(navigateToLoginScreen : () ->Unit) {
                         shape = CutCornerShape(50.dp)
                     ),
                 onClick = {
+                    navigateToLoginScreen()
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent, contentColor = Color.White
@@ -159,6 +160,7 @@ fun MainScreen(navigateToLoginScreen : () ->Unit) {
                         shape = CutCornerShape(50.dp)
                     ),
                 onClick = {
+                          navigateToLoginScreen()
                 },
                 enabled = continueGame,
                 colors = ButtonDefaults.buttonColors(

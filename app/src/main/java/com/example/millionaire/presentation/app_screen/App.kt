@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import com.example.millionaire.navigation.AppNavGraph
 import com.example.millionaire.navigation.Screen
 import com.example.millionaire.navigation.rememberNavigationState
+import com.example.millionaire.presentation.finish_game_screen.FinishGameScreen
 import com.example.millionaire.presentation.game_screen.GameScreen
 import com.example.millionaire.presentation.login_screen.LoginScreen
 import com.example.millionaire.presentation.main_screen.MainScreen
@@ -57,16 +58,48 @@ fun AppGraph() {
             )
         },
         gameScreenContent = {
-            GameScreen()
+            GameScreen(
+                navigateToResultScreen = { isFinish, level, countMoney ->
+                    navigationState.navigateTo(
+                        "${Screen.ResultScreen.route}/$isFinish/$level/$countMoney"
+                    )
+                }
+            )
         },
         recordsScreenContent = {
             RecordsScreen()
         },
-        resultScreenContent = {
-            ResultScreen()
+        resultScreenContent = { isFinishGame, level, countMoney ->
+            ResultScreen(
+                isFinishGame = isFinishGame,
+                level = level,
+                countMoney = countMoney,
+                navigationToBack = {
+                    navigationState.navigateToBack()
+                },
+                navigationToFinishGame = { levelExtra, countMoneyExtra ->
+                    navigationState.navigateTo(
+                        "${Screen.FinishGameScreen.route}/$levelExtra/$countMoneyExtra"
+                    )
+                }
+            )
         },
         rulesScreenContent = {
             RulesScreen()
+        },
+        finishGameScreenContent = { level, countMoney ->
+            FinishGameScreen(
+                level = level,
+                countMoney = countMoney,
+                navigateToLoginScreen = {
+                    navigationState.resetNavigation()
+                    navigationState.navigateTo(Screen.LoginScreen.route)
+                },
+                navigateToMainScreen = {
+                    navigationState.resetNavigation()
+
+                }
+            )
         }
     )
 }

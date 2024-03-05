@@ -1,5 +1,6 @@
 package com.example.millionaire.presentation.finish_game_screen
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,7 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -104,7 +107,12 @@ fun FinishGameScreen(
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = {
+            Button(
+                modifier = Modifier.height(60.dp).width(300.dp),
+                colors = ButtonDefaults.buttonColors(Color(8, 60, 102, 100)),
+                border = BorderStroke(3.dp, Color.White),
+                shape = CutCornerShape(50),
+                onClick = {
                 if (lifecycle.currentState == Lifecycle.State.RESUMED) {
                     navigateToLoginScreen()
                 }
@@ -117,7 +125,12 @@ fun FinishGameScreen(
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = {
+            Button(
+                modifier = Modifier.height(60.dp).width(300.dp),
+                colors = ButtonDefaults.buttonColors(Color(8, 60, 102, 100)),
+                border = BorderStroke(3.dp, Color.White),
+                shape = CutCornerShape(50),
+                onClick = {
                 if (lifecycle.currentState == Lifecycle.State.RESUMED) {
                     navigateToMainScreen()
                 }

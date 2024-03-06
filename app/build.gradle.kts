@@ -94,4 +94,7 @@ dependencies {
 
     // for Immutable
     implementation("org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7")
+
+    // For collectAsStateWithLifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 }

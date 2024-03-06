@@ -57,7 +57,14 @@ fun AppGraph() {
             )
         },
         gameScreenContent = {
-            GameScreen()
+            GameScreen(
+                navigationToResultScreen = { isFinish, level, countMoney ->
+//                    navigationState.navigateTo()
+                },
+                navigationToFinishScreen = { level, countMoney ->
+
+                }
+            )
         },
         recordsScreenContent = {
             RecordsScreen()

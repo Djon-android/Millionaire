@@ -1,22 +1,29 @@
 package com.example.millionaire.presentation.game_screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.millionaire.R
 
 @Composable
-fun GameScreen() {
+fun GameScreen(
+    viewModel: GameViewModel = hiltViewModel(),
+    navigationToResultScreen: (Boolean, Int, Int) -> Unit,
+    navigationToFinishScreen: (Int, Int) -> Unit
+) {
+    val uiState =
+        viewModel.uiState.collectAsStateWithLifecycle(initialValue = QuestionsState.Initial)
+
     Box(
         contentAlignment = Alignment.BottomStart,
         modifier = Modifier
@@ -28,8 +35,21 @@ fun GameScreen() {
             .statusBarsPadding()
             .safeContentPadding()
     ) {
-        Text("first", color = Color.White)
-        Image(painter = painterResource(id = R.drawable.logo), contentDescription = null, modifier = Modifier.align(
-            Alignment.Center))
+        GameScreenContent(
+            uiState = uiState,
+            viewModel = viewModel,
+            navigationToResultScreen = navigationToResultScreen,
+            navigationToFinishScreen = navigationToFinishScreen
+        )
     }
+}
+
+@Composable
+fun GameScreenContent(
+    uiState: State<QuestionsState>,
+    viewModel: GameViewModel,
+    navigationToResultScreen: (Boolean, Int, Int) -> Unit,
+    navigationToFinishScreen: (Int, Int) -> Unit
+) {
+
 }

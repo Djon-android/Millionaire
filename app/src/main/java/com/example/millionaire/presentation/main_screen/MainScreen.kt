@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -75,11 +76,16 @@ fun MainScreen(
     )
     BottomSheetScaffold(
         sheetContent = {
-            Text(text = bottomSheetText, modifier = Modifier.padding(16.dp), fontSize = 16.sp)
+            Text(text = bottomSheetText, modifier = Modifier
+                .fillMaxSize(0.8f)
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = 50.dp, start = 15.dp,end = 15.dp), fontSize = 19.sp)
 
         },
         scaffoldState = scaffoldState,
         sheetPeekHeight = 0.dp,
+        sheetContentColor = Color.White,
+        sheetContainerColor = Color(0xFF2c2e47)
     ) {
 
         Image(painter = painterResource(id = R.drawable.background),
@@ -96,7 +102,7 @@ fun MainScreen(
                 imageVector = Icons.Default.Info,
                 contentDescription = "Правила игры",
                 modifier = Modifier
-                    .padding(18.dp)
+                    .padding(30.dp)
                     .size(27.dp)
                     .clickable {
                         bottomSheetText = textRules
@@ -181,7 +187,7 @@ fun MainScreen(
                     fontWeight = FontWeight.Bold,
                 )
             }
-            Spacer(modifier = Modifier.size(40.dp))
+            Spacer(modifier = Modifier.size(60.dp))
         }
     }
 }

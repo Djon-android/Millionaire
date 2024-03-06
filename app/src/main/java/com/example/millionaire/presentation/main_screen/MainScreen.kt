@@ -93,7 +93,6 @@ fun MainScreen(
         , modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop)
 
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -101,26 +100,7 @@ fun MainScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
         ) {
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.TopEnd,
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Info,
-                    contentDescription = "Правила игры",
-                    modifier = Modifier
-                        .padding(45.dp)
-                        .size(27.dp)
-                        .clickable {
-                            bottomSheetText = textRules
-                            scope.launch {
-                                scaffoldState.bottomSheetState.expand()
-                            }
-                        },
-                    tint = Color.White
-                )
-            }
-            Spacer(modifier = Modifier.size(100.dp))
+
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Логотип игры",
@@ -189,6 +169,25 @@ fun MainScreen(
                 )
             }
             Spacer(modifier = Modifier.size(60.dp))
+        }
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.TopEnd,
+        ) {
+            Icon(
+                imageVector = Icons.Default.Info,
+                contentDescription = "Правила игры",
+                modifier = Modifier
+                    .padding(45.dp)
+                    .size(27.dp)
+                    .clickable {
+                        bottomSheetText = textRules
+                        scope.launch {
+                            scaffoldState.bottomSheetState.expand()
+                        }
+                    },
+                tint = Color.White
+            )
         }
     }
 }

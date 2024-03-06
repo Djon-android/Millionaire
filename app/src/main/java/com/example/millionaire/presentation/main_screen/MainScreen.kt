@@ -94,32 +94,33 @@ fun MainScreen(
             contentScale = ContentScale.Crop)
 
 
-        Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.TopEnd,
-        ) {
-            Icon(
-                imageVector = Icons.Default.Info,
-                contentDescription = "Правила игры",
-                modifier = Modifier
-                    .padding(30.dp)
-                    .size(27.dp)
-                    .clickable {
-                        bottomSheetText = textRules
-                        scope.launch {
-                            scaffoldState.bottomSheetState.expand()
-                        }
-                    },
-                tint = Color.White
-            )
-
-        }
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Bottom
         ) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.TopEnd,
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Info,
+                    contentDescription = "Правила игры",
+                    modifier = Modifier
+                        .padding(45.dp)
+                        .size(27.dp)
+                        .clickable {
+                            bottomSheetText = textRules
+                            scope.launch {
+                                scaffoldState.bottomSheetState.expand()
+                            }
+                        },
+                    tint = Color.White
+                )
+            }
+            Spacer(modifier = Modifier.size(100.dp))
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Логотип игры",
@@ -200,7 +201,7 @@ fun MainScreenPreview() {
 }
 
 val textTeam =
-    "Евгений - evgeny_mobile\nБулат - mezeksan\nШамси - umaq\nНикита - nikita_novikov2308"
+    "Евгений - evgeny_mobile\n\nБулат - mezeksan\n\nШамси - umaq\n\nНикита - nikita_novikov2308"
 val textRules =
     "Игра \"Кто хочет стать миллионером\" - это популярная телевизионная игра, основанная на британском формате \"Who Wants to Be a Millionaire?\". В игре участвует один участник, который поочередно отвечает на вопросы и пытается выиграть максимальный денежный приз.\n" +
             "\n" +

@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.BottomSheetScaffold
@@ -77,11 +79,13 @@ fun MainScreen(
 
         },
         scaffoldState = scaffoldState,
-        sheetPeekHeight = 0.dp
+        sheetPeekHeight = 0.dp,
     ) {
 
-        Image(painter = painterResource(id = R.drawable.background), contentDescription = "Задний фон"
-        , modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+        Image(painter = painterResource(id = R.drawable.background),
+            contentDescription = "Задний фон"
+        , modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop)
 
 
         Box(
@@ -106,10 +110,9 @@ fun MainScreen(
         }
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.8f),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Bottom
         ) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
@@ -123,12 +126,7 @@ fun MainScreen(
                 color = Color.White,
                 fontWeight = FontWeight.Bold
             )
-        }
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+            Spacer(modifier = Modifier.size(120.dp))
             Button(
                 modifier = Modifier
                     .size(311.dp, 62.dp)
@@ -167,20 +165,22 @@ fun MainScreen(
             ) {
                 Text(text = "Continue Game", fontSize = 24.sp)
             }
-            Text(
-                text = "© TEAM 2",
-                modifier = Modifier
-                    .padding(20.dp)
-                    .clickable {
-                        bottomSheetText = textTeam
-                        scope.launch {
-                            scaffoldState.bottomSheetState.expand()
-                        }
-                    },
-                color = Color.White,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-            )
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
+                Text(
+                    text = "© TEAM 2",
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .clickable {
+                            bottomSheetText = textTeam
+                            scope.launch {
+                                scaffoldState.bottomSheetState.expand()
+                            }
+                        },
+                    color = Color.White,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
             Spacer(modifier = Modifier.size(40.dp))
         }
     }

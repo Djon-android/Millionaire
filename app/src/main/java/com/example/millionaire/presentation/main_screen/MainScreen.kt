@@ -33,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -79,15 +80,9 @@ fun MainScreen(
         sheetPeekHeight = 0.dp
     ) {
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(Color(0xFF374C94), Color(0xFF100E16))
-                    )
-                )
-        )
+        Image(painter = painterResource(id = R.drawable.background), contentDescription = "Задний фон"
+        , modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+
 
         Box(
             modifier = Modifier.fillMaxWidth(),

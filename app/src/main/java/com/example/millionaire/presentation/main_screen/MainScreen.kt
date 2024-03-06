@@ -56,7 +56,6 @@ import kotlinx.coroutines.launch
 fun MainScreen(
 
     navigationToLogin: () -> Unit,
-    navigationToRules: () -> Unit,
     navigationToResults: () -> Unit
 ) {
     val continueGame by remember { mutableStateOf(false) }
@@ -201,7 +200,7 @@ fun MainScreen(
 @ExperimentalMaterial3Api
 @Composable
 fun MainScreenPreview() {
-    MainScreen({}, {}, {})
+    MainScreen({}, {})
 }
 
 val textTeam =

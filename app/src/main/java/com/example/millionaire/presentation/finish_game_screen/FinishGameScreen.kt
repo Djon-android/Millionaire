@@ -79,7 +79,7 @@ fun FinishGameScreen(
                 fontSize = 32.sp,
                 fontWeight = FontWeight(600)
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             Text(
                 text = _levels + "$level",
@@ -88,7 +88,7 @@ fun FinishGameScreen(
                 fontWeight = FontWeight(400)
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(2.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -102,7 +102,7 @@ fun FinishGameScreen(
                         .shadow(8.dp, shape = RoundedCornerShape(90.dp)),
                     contentDescription = "coin"
                 )
-                Spacer(modifier = Modifier.width(10.dp))
+                Spacer(modifier = Modifier.width(3.dp))
                 Text(
                     text = "$$countMoney",
                     color = Color.White,
@@ -110,6 +110,7 @@ fun FinishGameScreen(
                     fontWeight = FontWeight(600)
                 )
             }
+            Spacer(modifier = Modifier.height(160.dp))
         }
 
         Column(

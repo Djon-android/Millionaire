@@ -40,9 +40,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.millionaire.R
@@ -110,11 +112,12 @@ fun MainScreen(
                 shadow(elevation = 20.dp, shape = CircleShape)
             )
             Text(
-                text = "Who Wants to be a Millionare",
+                text = "Who Wants\nto be a Millionare",
                 fontSize = 32.sp,
                 textAlign = TextAlign.Center,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
+                lineHeight = 40.sp
             )
             Spacer(modifier = Modifier.size(120.dp))
             Button(

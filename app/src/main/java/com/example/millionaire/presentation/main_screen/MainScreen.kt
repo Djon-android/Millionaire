@@ -4,12 +4,11 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -35,16 +34,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.millionaire.R
@@ -56,15 +54,16 @@ import kotlinx.coroutines.launch
 fun MainScreen(
 
     navigationToLogin: () -> Unit,
-    navigationToResults: () -> Unit
+    navigationToResults: () -> Unit,
+    isSecondStart: Boolean = false,
+    bestScore :Int? = null
 ) {
     val continueGame by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
     var bottomSheetText by remember { mutableStateOf("") }
-
-
+    
     val buttonYellowGradient = Brush.verticalGradient(
         colors = listOf(
             Color(0xFFE1CF30), Color(0xFFE19A30),
@@ -82,7 +81,7 @@ fun MainScreen(
             Text(text = bottomSheetText, modifier = Modifier
                 .fillMaxSize(0.8f)
                 .verticalScroll(rememberScrollState())
-                .padding(bottom = 50.dp, start = 15.dp,end = 15.dp), fontSize = 19.sp)
+                .padding(bottom = 50.dp, start = 15.dp, end = 15.dp), fontSize = 19.sp)
 
         },
         scaffoldState = scaffoldState,
@@ -107,8 +106,9 @@ fun MainScreen(
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Логотип игры",
-                modifier = Modifier.size(195.dp).
-                shadow(elevation = 20.dp, shape = CircleShape)
+                modifier = Modifier
+                    .size(195.dp)
+                    .shadow(elevation = 20.dp, shape = CircleShape)
             )
             Text(
                 text = "Who Wants\nto be a Millionare",
@@ -118,6 +118,28 @@ fun MainScreen(
                 fontWeight = FontWeight.Bold,
                 lineHeight = 40.sp
             )
+
+            if(isSecondStart && bestScore!= null) {
+                Text(
+                    text = "All-time best score",
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                    color = Color.White,
+                    modifier = Modifier.alpha(0.5f)
+                )
+                Row {
+                    Image(
+                        painter = painterResource(id = R.drawable.coin),
+                        contentDescription = "Монетка",
+                        modifier = Modifier.size(24.dp).padding(end = 8.dp)
+                    )
+                    Text(text = "$${bestScore.toString()}",
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold)
+
+                }
+            }
             Spacer(modifier = Modifier.size(120.dp))
             Button(
                 modifier = Modifier
@@ -200,7 +222,7 @@ fun MainScreen(
 @ExperimentalMaterial3Api
 @Composable
 fun MainScreenPreview() {
-    MainScreen({}, {})
+    MainScreen({}, {},true,15000)
 }
 
 val textTeam =

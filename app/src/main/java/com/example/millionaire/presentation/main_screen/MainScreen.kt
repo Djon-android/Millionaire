@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -34,6 +35,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -104,14 +106,15 @@ fun MainScreen(
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Логотип игры",
-                modifier = Modifier.size(195.dp)
+                modifier = Modifier.size(195.dp).
+                shadow(elevation = 20.dp, shape = CircleShape)
             )
             Text(
                 text = "Who Wants to be a Millionare",
                 fontSize = 32.sp,
                 textAlign = TextAlign.Center,
                 color = Color.White,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
             Spacer(modifier = Modifier.size(120.dp))
             Button(
@@ -143,14 +146,13 @@ fun MainScreen(
                 onClick = {
                     navigationToLogin()
                 },
-                enabled = continueGame,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent, contentColor = Color.White
                 ),
                 shape = CutCornerShape(50.dp),
                 border = BorderStroke(2.dp, Color.White)
             ) {
-                Text(text = "Continue Game", fontSize = 24.sp)
+                Text(text = "Records", fontSize = 24.sp)
             }
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
                 Text(

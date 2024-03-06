@@ -2,6 +2,7 @@ package com.example.millionaire.presentation.finish_game_screen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,13 +14,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -43,8 +51,6 @@ fun FinishGameScreen(
     navigateToLoginScreen: () -> Unit,
     navigateToMainScreen: () -> Unit
 ) {
-    val lifecycle = LocalLifecycleOwner.current.lifecycle
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -62,7 +68,9 @@ fun FinishGameScreen(
         ) {
             Image(
                 painter = painterResource(R.drawable.logo),
-                modifier = Modifier.size(width = 195.dp, height = 195.dp),
+                modifier = Modifier
+                    .size(width = 195.dp, height = 195.dp)
+                    .shadow(12.dp, shape = RoundedCornerShape(90.dp)),
                 contentDescription = "logo"
             )
             Text(
@@ -89,7 +97,9 @@ fun FinishGameScreen(
             ) {
                 Image(
                     painter = painterResource(R.drawable.coin),
-                    modifier = Modifier.size(width = 32.dp, height = 32.dp),
+                    modifier = Modifier
+                        .size(width = 42.dp, height = 42.dp)
+                        .shadow(8.dp, shape = RoundedCornerShape(90.dp)),
                     contentDescription = "coin"
                 )
                 Spacer(modifier = Modifier.width(10.dp))
@@ -107,45 +117,60 @@ fun FinishGameScreen(
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(
-                modifier = Modifier.height(60.dp).width(300.dp),
-                colors = ButtonDefaults.buttonColors(Color(8, 60, 102, 100)),
-                border = BorderStroke(3.dp, Color.White),
-                shape = CutCornerShape(50),
-                onClick = {
-                if (lifecycle.currentState == Lifecycle.State.RESUMED) {
-                    navigateToLoginScreen()
-                }
-            }) {
-                Text(
-                    text = _newGame,
-                    color = Color.White,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight(600)
-                )
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(
-                modifier = Modifier.height(60.dp).width(300.dp),
-                colors = ButtonDefaults.buttonColors(Color(8, 60, 102, 100)),
-                border = BorderStroke(3.dp, Color.White),
-                shape = CutCornerShape(50),
-                onClick = {
-                if (lifecycle.currentState == Lifecycle.State.RESUMED) {
-                    navigateToMainScreen()
-                }
-            }) {
-                Text(
-                    text = _mainScreen,
-                    color = Color.White,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight(600)
-                )
-            }
-
-            Spacer(modifier = Modifier.height(64.dp))
-
+            Button(text = _newGame, onClick = { navigateToLoginScreen() })
+            Spacer(modifier = Modifier.height(12.dp))
+            Button(text = _mainScreen, onClick = { navigateToMainScreen() })
+            Spacer(modifier = Modifier.height(62.dp))
         }
     }
 }
 
+@Composable
+fun Button(
+    text: String,
+    onClick: () -> Unit,
+) {
+    var colorGradient by remember { mutableStateOf(blueGradient) }
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    Button(
+        modifier = Modifier
+            .height(62.dp)
+            .width(311.dp)
+            .background(
+                brush = colorGradient, shape = CutCornerShape(50)
+            ),
+        border = BorderStroke(3.dp, Color.White),
+        shape = CutCornerShape(50),
+        colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+        onClick = {
+            colorGradient = orangeGradient
+            if (lifecycle.currentState == Lifecycle.State.RESUMED) {
+                onClick()
+            }
+        }) {
+        Text(
+            text = text,
+            color = Color.White,
+            fontSize = 24.sp,
+            fontWeight = FontWeight(600)
+        )
+    }
+}
+
+val blueGradient: Brush = Brush.verticalGradient(
+    colors = listOf(
+        Color(8, 60, 102),
+        Color(2, 43, 84),
+        Color(2, 6, 49),
+        Color(8, 60, 102)
+    )
+)
+
+val orangeGradient: Brush = Brush.verticalGradient(
+    colors = listOf(
+        Color(225, 207, 48),
+        Color(225, 154, 48),
+        Color(225, 154, 48),
+        Color(225, 207, 48)
+    )
+)

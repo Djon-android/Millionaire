@@ -8,5 +8,4 @@ fun MainScreen(
     navigationToRules: () -> Unit,
     navigationToResults: () -> Unit
 ) {
-
 }

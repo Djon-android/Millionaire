@@ -1,5 +1,7 @@
 package com.example.millionaire.presentation.login_screen
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,22 +38,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.millionaire.R
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-//@Composable
-//fun LoginScreen(
-//    navigateToGame: () -> Unit
-//) {
-//}
-
-
 @Composable
-fun LoginScreen () {
-
+fun LoginScreen (navigateToGame: () -> Unit) {
+    val context = LocalContext.current
     val buttonBlueGradient = Brush.verticalGradient(
         colors = listOf(
             Color(0xFF025D83), Color(0xFF022B54),
@@ -89,7 +85,7 @@ fun LoginScreen () {
 // заменил label на placeholder
             placeholder = {
                 Text(
-                    text = "Enter your name",
+                    text = "Enter your nickname",
                     textAlign = TextAlign.Center,
                     color = Color.Gray,
                     modifier = Modifier
@@ -130,6 +126,15 @@ fun LoginScreen () {
                     shape = CutCornerShape(50.dp)
                 ),
             onClick = {
+                if(filledName.isNotEmpty()){
+                              navigateToGame()
+
+                }
+                else{
+                    val toast = Toast.makeText(context,
+                        "Введите никнейм",
+                        Toast.LENGTH_SHORT).show()
+                }
 
             },
             colors = ButtonDefaults.buttonColors(
@@ -149,5 +154,5 @@ fun LoginScreen () {
 @Preview (showBackground = true, showSystemUi = true)
 @Composable
 fun LoginScreenPreview(){
-    LoginScreen()
+    LoginScreen({})
 }

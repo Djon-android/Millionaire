@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun LoginScreen (navigateToGame: () -> Unit) {
     val context = LocalContext.current
+    val maxChar = 15
     val buttonBlueGradient = Brush.verticalGradient(
         colors = listOf(
             Color(0xFF025D83), Color(0xFF022B54),
@@ -95,7 +96,9 @@ fun LoginScreen (navigateToGame: () -> Unit) {
                     },
             value = filledName,
             onValueChange = {
-                filledName = it
+                if(it.length <=23){
+                    filledName = it
+                }
                             },
             textStyle = TextStyle(
                 color = Color.White,

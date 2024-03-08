@@ -64,12 +64,16 @@ fun PlayMusicOnEntry() {
 }
 
 
-@Preview(showBackground = true)
+
 @Composable
-fun LoseScreen() {
-    val level = 11
-    val isFinishGame = false
-    val countMoney:Int = 0
+fun LoseScreen(
+    isFinishGame: Boolean,
+    level: Int,
+    countMoney: Int,
+    navigationToFinishGame: (Int, Int) -> Unit,
+    navigationToBack: () -> Unit
+) {
+
     val buttonYellowGradient = Brush.verticalGradient(
         colors = listOf(
             Color(0xFFE1CF30), Color(0xFFE19A30),
@@ -115,10 +119,20 @@ fun LoseScreen() {
             )
             .statusBarsPadding()
             .safeContentPadding()
-            .clickable {   }
+            .clickable { }
     ) {
         Row {
-
+            Button(
+                onClick = { navigationToFinishGame(level, countMoney) },
+                modifier = Modifier.padding(top = 25.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.lose),
+                    contentDescription = "Логотип игры",
+                    modifier = Modifier
+                        .size(32.dp)
+                )
+            }
         }
         Box(
             modifier = Modifier.fillMaxSize(),
@@ -137,7 +151,7 @@ fun LoseScreen() {
                     val cardColor = when {
                         index + 1 == level -> GreenGradient
                         (index == 4) || (index == 9) -> buttonLightBlueGradient
-                        index == 14  -> buttonYellowGradient
+                        index == 14 -> buttonYellowGradient
                         else -> buttonBlueGradient
                     }
                     if (index == 4) {
@@ -273,9 +287,9 @@ fun LoseScreen() {
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Логотип игры",
                 modifier = Modifier
-                    .size(160.dp)
+                    .size(100.dp)
                     .align(Alignment.TopCenter)
-                    .padding(top = 60.dp)
+                    .padding(top = 1.dp)
             )
         }
 

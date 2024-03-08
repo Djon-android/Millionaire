@@ -53,13 +53,14 @@ fun PlayMusicOnEntry1() {
     }
 }
 
-
-@Preview(showBackground = true)
 @Composable
-fun ResultScreen() {
-    val level = 11
-    val isFinishGame = false
-    val countMoney:Int = 0
+fun ResultScreen(
+    isFinishGame: Boolean,
+    level: Int,
+    countMoney: Int,
+    navigationToFinishGame: (Int, Int) -> Unit,
+    navigationToBack: () -> Unit
+) {
     PlayMusicOnEntry1()
     val buttonYellowGradient = Brush.verticalGradient(
         colors = listOf(
@@ -106,7 +107,7 @@ fun ResultScreen() {
                 )
                 .statusBarsPadding()
                 .safeContentPadding()
-                .clickable {   }
+                .clickable { navigationToBack()  }
         ) {
             Row {
 

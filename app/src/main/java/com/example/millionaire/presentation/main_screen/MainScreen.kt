@@ -226,7 +226,7 @@ fun MainScreenPreview() {
 }
 
 val textTeam =
-    "Евгений - evgeny_mobile\n\nБулат - mezeksan\n\nШамси - umaq\n\nНикита - nikita_novikov2308"
+    "Евгений - evgeny_mobile\n\nБулат - mezeksan\n\nШамси - umaq\n\nНикита - nikita_novikov2308\n\nАлексей - dricnker"
 val textRules =
     "Игра \"Кто хочет стать миллионером\" - это популярная телевизионная игра, основанная на британском формате \"Who Wants to Be a Millionaire?\". В игре участвует один участник, который поочередно отвечает на вопросы и пытается выиграть максимальный денежный приз.\n" +
             "\n" +

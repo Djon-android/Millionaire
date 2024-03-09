@@ -15,7 +15,6 @@ import com.example.millionaire.presentation.login_screen.LoginScreen
 import com.example.millionaire.presentation.main_screen.MainScreen
 import com.example.millionaire.presentation.records_screen.RecordsScreen
 import com.example.millionaire.presentation.result_screen.ResultScreen
-import com.example.millionaire.presentation.rules_screen.RulesScreen
 import com.example.millionaire.presentation.ui.theme.MillionaireTheme
 
 @Composable
@@ -46,9 +45,6 @@ fun AppGraph() {
                 },
                 navigationToResults = {
                     navigationState.navigateTo(Screen.ResultScreen.route)
-                },
-                navigationToRules = {
-                    navigationState.navigateTo(Screen.RulesScreen.route)
                 }
             )
         },
@@ -93,9 +89,6 @@ fun AppGraph() {
                     )
                 }
             )
-        },
-        rulesScreenContent = {
-            RulesScreen()
         },
         finishGameScreenContent = { level, countMoney ->
             FinishGameScreen(

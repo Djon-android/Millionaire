@@ -20,7 +20,6 @@ fun AppNavGraph(
     gameScreenContent: @Composable () -> Unit,
     recordsScreenContent: @Composable () -> Unit,
     resultScreenContent: @Composable (Boolean, Int, Int) -> Unit,
-    rulesScreenContent: @Composable () -> Unit,
     finishGameScreenContent: @Composable (Int, Int) -> Unit
 ) {
     NavHost(navController = navHostController, startDestination = startDestinationScreen.route) {
@@ -56,9 +55,6 @@ fun AppNavGraph(
                 backStackEntry.arguments?.getInt(EXTRA_LEVEL) ?: UNKNOWN,
                 backStackEntry.arguments?.getInt(EXTRA_COUNT_MONEY) ?: UNKNOWN
             )
-        }
-        composable(route = Screen.RulesScreen.route) {
-            rulesScreenContent()
         }
         composable(
             route = "${Screen.FinishGameScreen.route}/{$EXTRA_LEVEL}/{$EXTRA_COUNT_MONEY}",

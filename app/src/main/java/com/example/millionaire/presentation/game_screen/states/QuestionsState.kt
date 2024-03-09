@@ -1,4 +1,4 @@
-package com.example.millionaire.presentation.game_screen
+package com.example.millionaire.presentation.game_screen.states
 
 import com.example.millionaire.domain.model.Question
 import kotlinx.collections.immutable.ImmutableList

@@ -59,10 +59,18 @@ fun AppGraph() {
         },
         gameScreenContent = {
             GameScreen(
-                navigateToResultScreen = { isFinish, level, countMoney ->
+                navigationToResultScreen = { isFinish, level, countMoney ->
                     navigationState.navigateTo(
                         "${Screen.ResultScreen.route}/$isFinish/$level/$countMoney"
                     )
+                },
+                navigationToFinishScreen = { level, countMoney ->
+                    navigationState.navigateTo(
+                        "${Screen.FinishGameScreen.route}/$level/$countMoney"
+                    )
+                },
+                navigationToBack = {
+                    navigationState.navigateToBack()
                 }
             )
         },

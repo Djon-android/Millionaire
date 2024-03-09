@@ -45,8 +45,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        prefs: SharedPreferences
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         val httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)

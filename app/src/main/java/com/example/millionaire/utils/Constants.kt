@@ -16,4 +16,8 @@ object Constants {
 
     const val TYPE_QUESTION_MULTIPLE = "multiple"
 
+    const val TIPS_ID_50_50 = "50_50"
+    const val TIPS_ID_CALL = "call"
+    const val TIPS_ID_AUDIENCE = "audience"
+
 }

@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Millionaire</string>
+    <string name="back">Back</string>
+    <string name="question">QUESTION #%1$s</string>
+    <string name="sum">$%1$s</string>
+    <string name="timer">Timer</string>
+    <string name="update">Update</string>
+    <string name="call_description">Ваш друг считает, что верный ответ:</string>
+    <string name="audience_desctiption">Аудитория считает, что верный ответ:</string>
+    <string name="ok">Ok</string>
 </resources>

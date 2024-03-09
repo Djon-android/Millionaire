@@ -2,7 +2,7 @@ package com.example.millionaire.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.millionaire.data.local.dao.PlayerResultDao
+import com.example.millionaire.data.local.dao.RecordsDao
 import com.example.millionaire.data.local.entity.PlayerResultEntity
 
 @Database(
@@ -13,5 +13,5 @@ import com.example.millionaire.data.local.entity.PlayerResultEntity
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract val playerResultDao: PlayerResultDao
+    abstract val recordsDao: RecordsDao
 }

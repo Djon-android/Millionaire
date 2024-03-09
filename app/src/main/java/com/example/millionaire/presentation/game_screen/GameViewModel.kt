@@ -305,7 +305,7 @@ class GameViewModel @Inject constructor(
                     else -> {
                         resetFlags()
                         soundControl(needPause = true)
-                        navigation()
+                        navigation(true)
                     }
                 }
             }
@@ -362,7 +362,7 @@ class GameViewModel @Inject constructor(
             } else {
                 _navigationFlow.emit(
                     NavigationFromGameState.NavigationToResultScreen(
-                        isFinish = false,
+                        isFinish = level == 15,
                         level = level,
                         countMoney = userSum
                     )

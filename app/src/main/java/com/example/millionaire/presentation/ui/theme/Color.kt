@@ -18,6 +18,8 @@ val Yellow = Color(0xFFFFB340)
 val Red = Color(0xFFFF6231)
 val DarkRed = Color(0xFF832203)
 
+val Gray = Color(0xFF2c2e47)
+
 val BlueGradient = listOf(
     Color(0xFF025D83),
     Color(0xFF022B54),

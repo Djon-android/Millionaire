@@ -8,4 +8,9 @@
     <string name="call_description">Ваш друг считает, что верный ответ:</string>
     <string name="audience_desctiption">Аудитория считает, что верный ответ:</string>
     <string name="ok">Ok</string>
+    <string name="logo">logo</string>
+    <string name="save_result">Coхранить результат</string>
+    <string name="are_you_sure_save_result">Вы хотите сохранить результат игры?</string>
+    <string name="not">Нет</string>
+    <string name="save">Сохранить</string>
 </resources>

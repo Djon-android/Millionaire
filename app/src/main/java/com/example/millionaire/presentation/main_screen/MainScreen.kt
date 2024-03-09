@@ -46,6 +46,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.millionaire.R
+import com.example.millionaire.presentation.ui.theme.Gray
 import kotlinx.coroutines.launch
 
 
@@ -86,7 +87,7 @@ fun MainScreen(
         scaffoldState = scaffoldState,
         sheetPeekHeight = 0.dp,
         sheetContentColor = Color.White,
-        sheetContainerColor = Color(0xFF2c2e47)
+        sheetContainerColor = Gray
     ) {
 
         Image(painter = painterResource(id = R.drawable.background),

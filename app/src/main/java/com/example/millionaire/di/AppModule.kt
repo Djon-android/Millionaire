@@ -1,12 +1,14 @@
 package com.example.millionaire.di
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.example.millionaire.data.local.AppDatabase
 import com.example.millionaire.data.network.ApiService
 import com.example.millionaire.utils.Constants.BASE_URL
 import com.example.millionaire.utils.Constants.NAME_DATABASE
+import com.example.millionaire.utils.Constants.NAME_SHARED_PREFERENCE
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -78,6 +80,12 @@ object AppModule {
             .addConverterFactory(converterFactory)
             .build()
             .create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPref(app: Application): SharedPreferences {
+        return app.getSharedPreferences(NAME_SHARED_PREFERENCE, Context.MODE_PRIVATE)
     }
 
     @Provides

@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -62,6 +63,7 @@ import com.example.millionaire.presentation.game_screen.states.QuestionsState
 import com.example.millionaire.presentation.game_screen.states.TipsDialogState
 import com.example.millionaire.presentation.ui.theme.BlueGradient
 import com.example.millionaire.presentation.ui.theme.DarkRed
+import com.example.millionaire.presentation.ui.theme.Gray
 import com.example.millionaire.presentation.ui.theme.GreenGradient
 import com.example.millionaire.presentation.ui.theme.LightBlueGradient
 import com.example.millionaire.presentation.ui.theme.Orange
@@ -542,6 +544,10 @@ fun Dialogs(
                 .wrapContentHeight()
                 .padding(16.dp),
             shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = Gray,
+                contentColor = White
+            )
 
             ) {
             Column(

@@ -1,5 +1,6 @@
 package com.example.millionaire.presentation.finish_game_screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -40,6 +41,10 @@ fun FinishGameScreen(
     navigateToLoginScreen: () -> Unit,
     navigateToMainScreen: () -> Unit
 ) {
+
+    BackHandler {
+
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()

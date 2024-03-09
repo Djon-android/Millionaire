@@ -15,4 +15,7 @@
     <string name="save">Сохранить</string>
     <string name="input_your_username">Введите свой никнейм</string>
     <string name="play">Play</string>
+    <string name="score">Score</string>
+    <string name="empty_records">List of records is empty…</string>
+    <string name="mainscreen">MainScreen</string>
 </resources>

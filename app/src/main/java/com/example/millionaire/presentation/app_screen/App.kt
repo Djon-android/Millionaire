@@ -74,7 +74,9 @@ fun AppGraph() {
         },
         recordsScreenContent = {
             RecordsScreen(
-                navigateToMainScreen = {}
+                navigateToMainScreen = {
+                    navigationState.navigateToBack()
+                }
             )
         },
         resultScreenContent = { isFinishGame, level, countMoney ->

@@ -43,8 +43,8 @@ fun AppGraph() {
                 navigationToLogin = {
                     navigationState.navigateTo(Screen.LoginScreen.route)
                 },
-                navigationToResults = {
-                    navigationState.navigateTo(Screen.ResultScreen.route)
+                navigationToRecords = {
+                    navigationState.navigateTo(Screen.RecordsScreen.route)
                 }
             )
         },

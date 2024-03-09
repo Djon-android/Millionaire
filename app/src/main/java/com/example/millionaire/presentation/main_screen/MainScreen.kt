@@ -52,9 +52,8 @@ import kotlinx.coroutines.launch
 @ExperimentalMaterial3Api
 @Composable
 fun MainScreen(
-
     navigationToLogin: () -> Unit,
-    navigationToResults: () -> Unit,
+    navigationToRecords: () -> Unit,
     isSecondStart: Boolean = false,
     bestScore :Int? = null
 ) {
@@ -167,9 +166,7 @@ fun MainScreen(
                         brush = buttonBlueGradient,
                         shape = CutCornerShape(50.dp)
                     ),
-                onClick = {
-                    navigationToLogin()
-                },
+                onClick = navigationToRecords,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent, contentColor = Color.White
                 ),

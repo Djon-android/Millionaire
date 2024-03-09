@@ -338,25 +338,35 @@ class GameViewModel @Inject constructor(
     private fun navigation(isFinish: Boolean = false) {
         needNewQuestion = isFinish.not()
         viewModelScope.launch {
-            when {
-                userSum >= 1000 -> {
-                    _navigationFlow.emit(
-                        NavigationFromGameState.NavigationToResultScreen(
-                            isFinish = isFinish,
-                            level = level,
-                            countMoney = userSum
+            if (isFinish) {
+                when {
+                    userSum >= 1000 -> {
+                        _navigationFlow.emit(
+                            NavigationFromGameState.NavigationToResultScreen(
+                                isFinish = true,
+                                level = level,
+                                countMoney = userSum
+                            )
                         )
-                    )
-                }
+                    }
 
-                else -> {
-                    _navigationFlow.emit(
-                        NavigationFromGameState.NavigationToFinishScreen(
-                            level = level,
-                            countMoney = userSum
+                    else -> {
+                        _navigationFlow.emit(
+                            NavigationFromGameState.NavigationToFinishScreen(
+                                level = level,
+                                countMoney = userSum
+                            )
                         )
-                    )
+                    }
                 }
+            } else {
+                _navigationFlow.emit(
+                    NavigationFromGameState.NavigationToResultScreen(
+                        isFinish = false,
+                        level = level,
+                        countMoney = userSum
+                    )
+                )
             }
         }
     }
@@ -476,6 +486,10 @@ class GameViewModel @Inject constructor(
                     200
                 }
 
+                200 -> {
+                    300
+                }
+
                 300 -> {
                     500
                 }
@@ -494,6 +508,10 @@ class GameViewModel @Inject constructor(
 
                 4000 -> {
                     8000
+                }
+
+                8000 -> {
+                    16000
                 }
 
                 16000 -> {

@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.millionaire.R
 import com.example.millionaire.utils.Button
 
@@ -35,8 +36,8 @@ private val _mainScreen: String = "Main screen"
 private val _emtyRecordsList: String = "List of records is empty..."
 
 @Composable
-fun RecordsScreenPreview(
-    listRecords: RecordViewModel,
+fun RecordsScreen(
+    listRecords: RecordViewModel = hiltViewModel(),
     navigateToMainScreen: () -> Unit
 ) {
 

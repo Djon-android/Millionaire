@@ -2,6 +2,8 @@ package com.example.millionaire.presentation.records_screen
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 data class Record(
     val id: Int,
@@ -9,7 +11,8 @@ data class Record(
     val score: Int
 )
 
-class RecordViewModel() : ViewModel() {
+@HiltViewModel
+class RecordViewModel @Inject constructor() : ViewModel() {
     private val _listRecords =
         mutableStateOf(
             listOf<Record>(

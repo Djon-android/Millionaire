@@ -38,5 +38,17 @@ val Typography = Typography(
         fontWeight = FontWeight.W600,
         fontSize = 24.sp,
         color = White
+    ),
+    displayLarge = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W600,
+        fontSize = 32.sp,
+        color = White
+    ),
+    displayMedium = TextStyle(
+        fontFamily = Inter,
+        fontWeight = FontWeight.W600,
+        fontSize = 28.sp,
+        color = White
     )
 )

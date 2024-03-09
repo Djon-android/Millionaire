@@ -298,6 +298,7 @@ fun ActionBar(
     numberOfQuestion: State<Int>,
     questionMoney: State<Int>
 ) {
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -307,7 +308,11 @@ fun ActionBar(
         IconButton(
             modifier = Modifier
                 .size(32.dp),
-            onClick = navigationToBack
+            onClick = {
+                if (lifecycle.currentState == Lifecycle.State.RESUMED) {
+                    navigationToBack()
+                }
+            }
         ) {
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.arrow_back),
@@ -549,7 +554,7 @@ fun Dialogs(
                 contentColor = White
             )
 
-            ) {
+        ) {
             Column(
                 modifier = Modifier
                     .padding(16.dp),

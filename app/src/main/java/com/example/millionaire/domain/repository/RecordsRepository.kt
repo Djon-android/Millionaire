@@ -6,4 +6,5 @@ interface RecordsRepository {
 
     suspend fun saveResult(sum: Int)
     suspend fun getRecords(): List<PlayerResult>
+    suspend fun saveUsername(username: String)
 }

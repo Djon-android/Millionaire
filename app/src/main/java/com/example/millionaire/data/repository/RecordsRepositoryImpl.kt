@@ -26,4 +26,8 @@ class RecordsRepositoryImpl @Inject constructor(
     override suspend fun getRecords(): List<PlayerResult> {
         return recordsDao.getRecords().map { it.toPlayerResult() }
     }
+
+    override suspend fun saveUsername(username: String) {
+        prefs.edit().putString(EXTRA_USERNAME, username).apply()
+    }
 }

@@ -13,4 +13,6 @@
     <string name="are_you_sure_save_result">Вы хотите сохранить результат игры?</string>
     <string name="not">Нет</string>
     <string name="save">Сохранить</string>
+    <string name="input_your_username">Введите свой никнейм</string>
+    <string name="play">Play</string>
 </resources>

@@ -253,7 +253,8 @@ fun Game(
         ActionBar(
             navigationToBack = navigationToBack,
             numberOfQuestion = viewModel.numberOfQuestion,
-            questionMoney = viewModel.questionMoney
+            questionMoney = viewModel.questionMoney,
+            resetQuestions = viewModel::resetQuestions
         )
         Column(
             modifier = Modifier
@@ -295,6 +296,7 @@ fun Game(
 @Composable
 fun ActionBar(
     navigationToBack: () -> Unit,
+    resetQuestions: () -> Unit,
     numberOfQuestion: State<Int>,
     questionMoney: State<Int>
 ) {
@@ -311,6 +313,7 @@ fun ActionBar(
             onClick = {
                 if (lifecycle.currentState == Lifecycle.State.RESUMED) {
                     navigationToBack()
+                    resetQuestions()
                 }
             }
         ) {

@@ -122,6 +122,13 @@ class QuestionsRepositoryImpl @Inject constructor(
                 initialValue = LoadResource.Loading()
             )
 
+    override fun resetQuestions() {
+        _questions.clear()
+        _questionsEasy.clear()
+        _questionsMedium.clear()
+        _questionsHard.clear()
+    }
+
     override suspend fun reloadData() {
         _reloadDataFlow.emit(Unit)
     }

@@ -13,6 +13,7 @@ import com.example.millionaire.R
 import com.example.millionaire.domain.model.Question
 import com.example.millionaire.domain.usecases.GetQuestionsUseCase
 import com.example.millionaire.domain.usecases.ReloadQuestionsUseCase
+import com.example.millionaire.domain.usecases.ResetQuestionsUseCase
 import com.example.millionaire.presentation.game_screen.items.AnswerItem
 import com.example.millionaire.presentation.game_screen.items.TipsItem
 import com.example.millionaire.presentation.game_screen.states.NavigationFromGameState
@@ -39,8 +40,9 @@ private const val TAG = "GameViewModel"
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
-    private val getQuestionsUseCase: GetQuestionsUseCase,
+    getQuestionsUseCase: GetQuestionsUseCase,
     private val reloadQuestionsUseCase: ReloadQuestionsUseCase,
+    private val resetQuestionsUseCase: ResetQuestionsUseCase,
     private val application: Application
 ) : ViewModel() {
 
@@ -242,6 +244,10 @@ class GameViewModel @Inject constructor(
         }
     }
 
+    fun resetQuestions() {
+        resetQuestionsUseCase()
+    }
+
     private fun startGame() {
         Log.d(TAG, "startGame")
         if (gameStarted || gameEnd) {
@@ -369,6 +375,9 @@ class GameViewModel @Inject constructor(
                 )
             }
         }
+        if (isFinish || level == 15) {
+            resetQuestions()
+        }
     }
 
     private fun resetFlags() {
@@ -404,7 +413,7 @@ class GameViewModel @Inject constructor(
     }
 
     private fun createAnswers(question: Question): ImmutableList<AnswerItem> {
-        var resultList = mutableListOf<AnswerItem>()
+        val resultList = mutableListOf<AnswerItem>()
         resultList.addAll(question.incorrectAnswers.map { AnswerItem(title = it) })
         resultList.add(AnswerItem(title = question.correctAnswer))
         return resultList.shuffled().toImmutableList()

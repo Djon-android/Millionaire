@@ -7,5 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface QuestionsRepository {
     val questionsFlow: Flow<LoadResource<List<Question>>>
 
+    fun resetQuestions()
+
     suspend fun reloadData()
 }

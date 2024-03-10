@@ -130,7 +130,8 @@ fun LoginScreen(
             ) {
                 Text(
                     text = stringResource(R.string.play),
-                    style = Typography.bodyLarge
+                    style = Typography.bodyLarge,
+                    color = White
                 )
             }
         }

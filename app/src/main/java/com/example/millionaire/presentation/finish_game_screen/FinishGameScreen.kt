@@ -2,6 +2,7 @@ package com.example.millionaire.presentation.finish_game_screen
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,8 +11,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,20 +24,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.millionaire.R
-import com.example.millionaire.utils.Button
-
-private val _gameOver: String = "Game over!"
-private val _newGame: String = "New game"
-private val _mainScreen: String = "Main screen"
-private val _levels: String = "Level "
-
+import com.example.millionaire.presentation.common_components.CutButton
+import com.example.millionaire.presentation.ui.theme.BlueGradient
+import com.example.millionaire.presentation.ui.theme.OrangeGradient
+import com.example.millionaire.presentation.ui.theme.Typography
+import com.example.millionaire.presentation.ui.theme.White
 
 @Composable
 fun FinishGameScreen(
@@ -52,34 +54,36 @@ fun FinishGameScreen(
                 painterResource(R.drawable.background),
                 contentScale = ContentScale.FillBounds
             )
+            .statusBarsPadding()
+            .navigationBarsPadding()
     )
     {
-
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+            Spacer(modifier = Modifier.weight(1f))
+
             Image(
                 painter = painterResource(R.drawable.logo),
                 modifier = Modifier
-                    .size(width = 195.dp, height = 195.dp)
+                    .size(195.dp)
                     .shadow(12.dp, shape = RoundedCornerShape(90.dp)),
-                contentDescription = "logo"
+                contentDescription = stringResource(id = R.string.logo)
             )
             Text(
-                text = _gameOver,
-                color = Color.White,
-                fontSize = 32.sp,
-                fontWeight = FontWeight(600)
+                text = stringResource(R.string.game_over),
+                style = Typography.displayLarge
             )
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = _levels + "$level",
-                color = Color.White,
-                fontSize = 16.sp,
-                fontWeight = FontWeight(400)
+                text = "${stringResource(R.string.level)} $level",
+                style = Typography.titleMedium.copy(
+                    color = White.copy(alpha = 0.5f)
+                )
             )
 
             Spacer(modifier = Modifier.height(2.dp))
@@ -90,32 +94,53 @@ fun FinishGameScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(R.drawable.coin),
+                    painter = painterResource(R.drawable.money),
                     modifier = Modifier
-                        .size(width = 42.dp, height = 42.dp)
-                        .shadow(8.dp, shape = RoundedCornerShape(90.dp)),
-                    contentDescription = "coin"
+                        .size(42.dp),
+                    contentDescription = stringResource(R.string.coin)
                 )
                 Spacer(modifier = Modifier.width(3.dp))
                 Text(
                     text = "$$countMoney",
-                    color = Color.White,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight(600)
+                    style = Typography.labelLarge
                 )
             }
-            Spacer(modifier = Modifier.height(160.dp))
-        }
 
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Button(text = _newGame, onClick = { navigateToLoginScreen() })
-            Spacer(modifier = Modifier.height(12.dp))
-            Button(text = _mainScreen, onClick = { navigateToMainScreen() })
-            Spacer(modifier = Modifier.height(62.dp))
+            Spacer(modifier = Modifier.weight(1f))
+
+            Column(
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CutButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(62.dp)
+                        .padding(horizontal = 32.dp)
+                        .background(Brush.verticalGradient(OrangeGradient), CutCornerShape(50)),
+                    onClick = navigateToLoginScreen
+                ) {
+                    Text(
+                        text = stringResource(R.string.new_game),
+                        style = Typography.labelLarge
+                    )
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+                CutButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(62.dp)
+                        .padding(horizontal = 32.dp)
+                        .background(Brush.verticalGradient(BlueGradient), CutCornerShape(50)),
+                    onClick = navigateToMainScreen
+                ) {
+                    Text(
+                        text = stringResource(R.string.mainscreen),
+                        style = Typography.labelLarge
+                    )
+                }
+                Spacer(modifier = Modifier.height(62.dp))
+            }
         }
     }
 }

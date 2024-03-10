@@ -18,4 +18,8 @@
     <string name="score">Score</string>
     <string name="empty_records">List of records is empty…</string>
     <string name="mainscreen">MainScreen</string>
+    <string name="game_over">Game over!</string>
+    <string name="level">Level</string>
+    <string name="coin">coin</string>
+    <string name="new_game">New game</string>
 </resources>

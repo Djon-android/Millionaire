@@ -1,5 +1,6 @@
 package com.example.millionaire.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -23,16 +24,104 @@ fun AppNavGraph(
     finishGameScreenContent: @Composable (Int, Int) -> Unit
 ) {
     NavHost(navController = navHostController, startDestination = startDestinationScreen.route) {
-        composable(route = Screen.MainScreen.route) {
+        composable(
+            route = Screen.MainScreen.route,
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            }
+        ) {
             mainScreenContent()
         }
-        composable(route = Screen.LoginScreen.route) {
+        composable(
+            route = Screen.LoginScreen.route,
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            }
+        ) {
             loginScreenContent()
         }
-        composable(route = Screen.GameScreen.route) {
+        composable(
+            route = Screen.GameScreen.route,
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            }
+        ) {
             gameScreenContent()
         }
-        composable(route = Screen.RecordsScreen.route) {
+        composable(
+            route = Screen.RecordsScreen.route,
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            }
+        ) {
             recordsScreenContent()
         }
         composable(
@@ -48,7 +137,27 @@ fun AppNavGraph(
                 navArgument(EXTRA_COUNT_MONEY) {
                     type = NavType.IntType
                 },
-            )
+            ),
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            }
         ) { backStackEntry ->
             resultScreenContent(
                 backStackEntry.arguments?.getBoolean(EXTRA_IS_FINISH_GAME) ?: false,
@@ -65,7 +174,27 @@ fun AppNavGraph(
                 navArgument(EXTRA_COUNT_MONEY) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right
+                )
+            }
         ) { backStackEntry ->
             finishGameScreenContent(
                 backStackEntry.arguments?.getInt(EXTRA_LEVEL) ?: UNKNOWN,

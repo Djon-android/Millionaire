@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
@@ -124,14 +125,16 @@ fun MainScreen(
                     color = Color.White,
                     modifier = Modifier.alpha(0.5f)
                 )
-                Row {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Image(
                         painter = painterResource(id = R.drawable.money),
                         contentDescription = null,
                         modifier = Modifier
                             .size(24.dp)
-                            .padding(end = 8.dp)
                     )
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "$${viewModel.bestRecord.value}",
                         color = White,

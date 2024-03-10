@@ -22,5 +22,6 @@ object Constants {
     const val TIPS_ID_50_50 = "50_50"
     const val TIPS_ID_CALL = "call"
     const val TIPS_ID_AUDIENCE = "audience"
+    const val TIPS_ID_MISTAKE = "mistake"
 
 }

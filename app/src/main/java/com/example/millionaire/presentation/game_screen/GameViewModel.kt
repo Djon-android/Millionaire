@@ -22,6 +22,7 @@ import com.example.millionaire.presentation.game_screen.states.TipsDialogState
 import com.example.millionaire.utils.Constants.TIPS_ID_50_50
 import com.example.millionaire.utils.Constants.TIPS_ID_AUDIENCE
 import com.example.millionaire.utils.Constants.TIPS_ID_CALL
+import com.example.millionaire.utils.Constants.TIPS_ID_MISTAKE
 import com.example.millionaire.utils.LoadResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
@@ -56,6 +57,7 @@ class GameViewModel @Inject constructor(
     private var delayBeforeShowRightAnswer = 5
     private var userAnswer = ""
     private var needNewQuestion = false
+    private var tipsMistake = false
     private var _questions = mutableListOf<Question>()
     private var jobTimer: Job = Job()
     private var mediaPlayer = MediaPlayer.create(application, R.raw.clock_sound)
@@ -85,7 +87,7 @@ class GameViewModel @Inject constructor(
     private val _tips: MutableState<ImmutableList<TipsItem>> = mutableStateOf(
         persistentListOf(
             TipsItem(TIPS_ID_50_50),
-            TipsItem(TIPS_ID_CALL),
+            TipsItem(TIPS_ID_MISTAKE),
             TipsItem(TIPS_ID_AUDIENCE)
         )
     )
@@ -165,6 +167,10 @@ class GameViewModel @Inject constructor(
             userAnswer = answer
             val question = _questions[level]
             isRightAnswer = userAnswer == question.correctAnswer
+            if (tipsMistake) {
+                isRightAnswer = true
+                tipsMistake = false
+            }
             userSum = calculateSum(isRightAnswer)
             _answers.value = _answers.value.map {
                 it.copy(
@@ -234,6 +240,10 @@ class GameViewModel @Inject constructor(
                 viewModelScope.launch {
                     _tipsDialogFlow.emit(TipsDialogState.DialogTypeAudience(result))
                 }
+            }
+
+            TIPS_ID_MISTAKE -> {
+                tipsMistake = true
             }
         }
     }

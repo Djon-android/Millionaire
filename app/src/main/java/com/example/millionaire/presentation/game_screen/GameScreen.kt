@@ -75,6 +75,7 @@ import com.example.millionaire.presentation.ui.theme.White
 import com.example.millionaire.presentation.ui.theme.Yellow
 import com.example.millionaire.utils.Constants.TIPS_ID_50_50
 import com.example.millionaire.utils.Constants.TIPS_ID_CALL
+import com.example.millionaire.utils.Constants.TIPS_ID_MISTAKE
 import kotlinx.collections.immutable.ImmutableList
 
 @Composable
@@ -512,6 +513,10 @@ fun Tips(
 
                     TIPS_ID_CALL -> {
                         R.drawable.tips_call
+                    }
+
+                    TIPS_ID_MISTAKE -> {
+                        R.drawable.tips_mistake
                     }
 
                     else -> {

@@ -7,6 +7,8 @@ import com.example.millionaire.data.mapper.toPlayerResult
 import com.example.millionaire.domain.model.PlayerResult
 import com.example.millionaire.domain.repository.RecordsRepository
 import com.example.millionaire.utils.Constants.EXTRA_USERNAME
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RecordsRepositoryImpl @Inject constructor(
@@ -29,5 +31,9 @@ class RecordsRepositoryImpl @Inject constructor(
 
     override suspend fun saveUsername(username: String) {
         prefs.edit().putString(EXTRA_USERNAME, username).apply()
+    }
+
+    override fun getBestRecord(): Flow<PlayerResult?> {
+        return recordsDao.getBestRecord().map { it?.toPlayerResult() }
     }
 }

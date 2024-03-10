@@ -22,4 +22,8 @@
     <string name="level">Level</string>
     <string name="coin">coin</string>
     <string name="new_game">New game</string>
+    <string name="who_wants_to_be_a_millionare">Who Wants\nto be a Millionare</string>
+    <string name="game_rules">Правила игры</string>
+    <string name="team_2">© TEAM 2</string>
+    <string name="records">Records</string>
 </resources>

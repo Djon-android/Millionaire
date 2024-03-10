@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -40,13 +41,20 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.millionaire.R
+import com.example.millionaire.presentation.common_components.CutButton
+import com.example.millionaire.presentation.ui.theme.BlueGradient
 import com.example.millionaire.presentation.ui.theme.Gray
+import com.example.millionaire.presentation.ui.theme.OrangeGradient
+import com.example.millionaire.presentation.ui.theme.Typography
+import com.example.millionaire.presentation.ui.theme.White
 import kotlinx.coroutines.launch
 
 
@@ -55,33 +63,21 @@ import kotlinx.coroutines.launch
 fun MainScreen(
     navigationToLogin: () -> Unit,
     navigationToRecords: () -> Unit,
-    isSecondStart: Boolean = false,
-    bestScore :Int? = null
+    viewModel: MainViewModel = hiltViewModel()
 ) {
-    val continueGame by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
     var bottomSheetText by remember { mutableStateOf("") }
-    
-    val buttonYellowGradient = Brush.verticalGradient(
-        colors = listOf(
-            Color(0xFFE1CF30), Color(0xFFE19A30),
-            Color(0xFFE19A30), Color(0xFFE1CF30)
-        )
-    )
-    val buttonBlueGradient = Brush.verticalGradient(
-        colors = listOf(
-            Color(0xFF025D83), Color(0xFF022B54),
-            Color(0xFF020631), Color(0xFF083C66)
-        )
-    )
+
     BottomSheetScaffold(
         sheetContent = {
-            Text(text = bottomSheetText, modifier = Modifier
-                .fillMaxSize(0.8f)
-                .verticalScroll(rememberScrollState())
-                .padding(bottom = 50.dp, start = 15.dp, end = 15.dp), fontSize = 19.sp)
+            Text(
+                text = bottomSheetText, modifier = Modifier
+                    .fillMaxSize(0.8f)
+                    .verticalScroll(rememberScrollState())
+                    .padding(bottom = 50.dp, start = 15.dp, end = 15.dp), fontSize = 19.sp
+            )
 
         },
         scaffoldState = scaffoldState,
@@ -90,10 +86,11 @@ fun MainScreen(
         sheetContainerColor = Gray
     ) {
 
-        Image(painter = painterResource(id = R.drawable.background),
-            contentDescription = "Задний фон"
-        , modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop)
+        Image(
+            painter = painterResource(id = R.drawable.background),
+            contentDescription = null, modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
 
         Column(
             modifier = Modifier
@@ -105,13 +102,13 @@ fun MainScreen(
 
             Image(
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Логотип игры",
+                contentDescription = stringResource(id = R.string.logo),
                 modifier = Modifier
                     .size(195.dp)
                     .shadow(elevation = 20.dp, shape = CircleShape)
             )
             Text(
-                text = "Who Wants\nto be a Millionare",
+                text = stringResource(R.string.who_wants_to_be_a_millionare),
                 fontSize = 32.sp,
                 textAlign = TextAlign.Center,
                 color = Color.White,
@@ -119,7 +116,7 @@ fun MainScreen(
                 lineHeight = 40.sp
             )
 
-            if(isSecondStart && bestScore!= null) {
+            if (viewModel.bestRecord.value > 0) {
                 Text(
                     text = "All-time best score",
                     fontSize = 16.sp,
@@ -129,56 +126,51 @@ fun MainScreen(
                 )
                 Row {
                     Image(
-                        painter = painterResource(id = R.drawable.coin),
-                        contentDescription = "Монетка",
-                        modifier = Modifier.size(24.dp).padding(end = 8.dp)
+                        painter = painterResource(id = R.drawable.money),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .padding(end = 8.dp)
                     )
-                    Text(text = "$${bestScore.toString()}",
-                        color = Color.White,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold)
+                    Text(
+                        text = "$${viewModel.bestRecord.value}",
+                        color = White,
+                        style = Typography.bodyLarge
+                    )
 
                 }
             }
             Spacer(modifier = Modifier.size(120.dp))
-            Button(
+            CutButton(
                 modifier = Modifier
-                    .size(311.dp, 62.dp)
+                    .fillMaxWidth()
+                    .padding(horizontal = 32.dp)
+                    .height(62.dp)
                     .background(
-                        brush = buttonYellowGradient,
+                        brush = Brush.verticalGradient(OrangeGradient),
                         shape = CutCornerShape(50.dp)
                     ),
-                onClick = {
-                    navigationToLogin()
-                },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Transparent, contentColor = Color.White
-                ),
-                shape = CutCornerShape(50.dp),
-                border = BorderStroke(2.dp, Color.White)
+                onClick = navigationToLogin
             ) {
-                Text(text = "New game", fontSize = 24.sp)
+                Text(text = stringResource(id = R.string.new_game), fontSize = 24.sp)
             }
             Spacer(modifier = Modifier.size(20.dp))
-            Button(
+            CutButton(
                 modifier = Modifier
-                    .size(311.dp, 62.dp)
+                    .fillMaxWidth()
+                    .padding(horizontal = 32.dp)
+                    .height(62.dp)
                     .background(
-                        brush = buttonBlueGradient,
+                        brush = Brush.verticalGradient(BlueGradient),
                         shape = CutCornerShape(50.dp)
                     ),
-                onClick = navigationToRecords,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Transparent, contentColor = Color.White
-                ),
-                shape = CutCornerShape(50.dp),
-                border = BorderStroke(2.dp, Color.White)
+                onClick = navigationToRecords
             ) {
-                Text(text = "Records", fontSize = 24.sp)
+                Text(text = stringResource(R.string.records), fontSize = 24.sp)
             }
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.BottomCenter) {
                 Text(
-                    text = "© TEAM 2",
+                    text = stringResource(R.string.team_2),
                     modifier = Modifier
                         .padding(20.dp)
                         .clickable {
@@ -200,7 +192,7 @@ fun MainScreen(
         ) {
             Icon(
                 imageVector = Icons.Default.Info,
-                contentDescription = "Правила игры",
+                contentDescription = stringResource(R.string.game_rules),
                 modifier = Modifier
                     .padding(45.dp)
                     .size(27.dp)
@@ -220,7 +212,7 @@ fun MainScreen(
 @ExperimentalMaterial3Api
 @Composable
 fun MainScreenPreview() {
-    MainScreen({}, {},true,15000)
+    MainScreen({}, {})
 }
 
 val textTeam =

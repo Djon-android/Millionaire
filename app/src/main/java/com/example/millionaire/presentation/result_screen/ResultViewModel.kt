@@ -66,6 +66,7 @@ class ResultViewModel @Inject constructor(
     fun dismissDialog() {
         viewModelScope.launch {
             _saveResultDialogFlow.emit(SaveResultDialogState.Initial)
+            navigation()
         }
     }
 
@@ -73,7 +74,6 @@ class ResultViewModel @Inject constructor(
         viewModelScope.launch {
             _saveResultDialogFlow.emit(SaveResultDialogState.Initial)
             saveResultUseCase(countMoney)
-            delay(1000)
             if (isFinish.not()) {
                 navigation()
             }

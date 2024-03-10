@@ -11,6 +11,7 @@ object Constants {
     const val EXTRA_COUNT_MONEY = "count_money"
     const val EXTRA_IS_FINISH_GAME = "is_finish_game"
     const val EXTRA_USERNAME = "username"
+    const val EXTRA_IS_LOSING = "is_losing"
 
     const val DIFFICULTY_QUESTION_EASY = "easy"
     const val DIFFICULTY_QUESTION_MEDIUM = "medium"

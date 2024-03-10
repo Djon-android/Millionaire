@@ -1,5 +1,6 @@
 package com.example.millionaire.presentation.finish_game_screen
 
+import android.media.MediaPlayer
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,12 +21,16 @@ import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -40,6 +45,7 @@ import com.example.millionaire.presentation.ui.theme.White
 fun FinishGameScreen(
     level: Int,
     countMoney: Int,
+    isLosing: Boolean,
     navigateToLoginScreen: () -> Unit,
     navigateToMainScreen: () -> Unit
 ) {
@@ -47,6 +53,9 @@ fun FinishGameScreen(
     BackHandler {
 
     }
+
+    PlayMusicOnEntry(isLosing = isLosing)
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -141,6 +150,27 @@ fun FinishGameScreen(
                 }
                 Spacer(modifier = Modifier.height(62.dp))
             }
+        }
+    }
+}
+
+@Composable
+fun PlayMusicOnEntry(isLosing: Boolean) {
+    val context = LocalContext.current
+    val mediaPlayer = remember {
+        MediaPlayer.create(context, R.raw.soundoflose)
+    }
+
+    LaunchedEffect(Unit) {
+        if (isLosing) {
+            mediaPlayer.start()
+        }
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            mediaPlayer.stop()
+            mediaPlayer.release()
         }
     }
 }

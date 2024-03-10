@@ -62,9 +62,9 @@ fun AppGraph() {
                         "${Screen.ResultScreen.route}/$isFinish/$level/$countMoney"
                     )
                 },
-                navigationToFinishScreen = { level, countMoney ->
+                navigationToFinishScreen = { level, countMoney, isLosing ->
                     navigationState.navigateTo(
-                        "${Screen.FinishGameScreen.route}/$level/$countMoney"
+                        "${Screen.FinishGameScreen.route}/$level/$countMoney/$isLosing"
                     )
                 },
                 navigationToBack = {
@@ -87,17 +87,18 @@ fun AppGraph() {
                 navigationToBack = {
                     navigationState.navigateToBack()
                 },
-                navigationToFinishGame = { levelExtra, countMoneyExtra ->
+                navigationToFinishGame = { levelExtra, countMoneyExtra, isLosing ->
                     navigationState.navigateTo(
-                        "${Screen.FinishGameScreen.route}/$levelExtra/$countMoneyExtra"
+                        "${Screen.FinishGameScreen.route}/$levelExtra/$countMoneyExtra/$isLosing"
                     )
                 }
             )
         },
-        finishGameScreenContent = { level, countMoney ->
+        finishGameScreenContent = { level, countMoney, isLosing ->
             FinishGameScreen(
                 level = level,
                 countMoney = countMoney,
+                isLosing = isLosing,
                 navigateToLoginScreen = {
                     navigationState.resetNavigation()
                     navigationState.navigateTo(Screen.LoginScreen.route)

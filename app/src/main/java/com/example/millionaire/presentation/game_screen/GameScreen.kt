@@ -81,7 +81,7 @@ import kotlinx.collections.immutable.ImmutableList
 fun GameScreen(
     viewModel: GameViewModel = hiltViewModel(),
     navigationToResultScreen: (Boolean, Int, Int) -> Unit,
-    navigationToFinishScreen: (Int, Int) -> Unit,
+    navigationToFinishScreen: (Int, Int, Boolean) -> Unit,
     navigationToBack: () -> Unit
 ) {
 
@@ -171,7 +171,7 @@ fun TipsDialog(
 fun Navigation(
     navigationState: State<NavigationFromGameState>,
     navigationToResultScreen: (Boolean, Int, Int) -> Unit,
-    navigationToFinishScreen: (Int, Int) -> Unit,
+    navigationToFinishScreen: (Int, Int, Boolean) -> Unit,
 ) {
     when (val currentState = navigationState.value) {
         is NavigationFromGameState.NavigationToResultScreen -> {
@@ -185,7 +185,8 @@ fun Navigation(
         is NavigationFromGameState.NavigationToFinishScreen -> {
             navigationToFinishScreen(
                 currentState.level,
-                currentState.countMoney
+                currentState.countMoney,
+                true
             )
         }
 

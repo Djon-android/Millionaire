@@ -66,7 +66,7 @@ fun ResultScreen(
     isFinishGame: Boolean,
     level: Int,
     countMoney: Int,
-    navigationToFinishGame: (Int, Int) -> Unit,
+    navigationToFinishGame: (Int, Int, Boolean) -> Unit,
     navigationToBack: () -> Unit
 ) {
 
@@ -94,7 +94,7 @@ fun ResultScreen(
     BackHandler(
         enabled = isFinishGame
     ) {
-        navigationToFinishGame(level, countMoney)
+        navigationToFinishGame(level, countMoney, false)
     }
 
     Box(
@@ -246,7 +246,7 @@ fun Dialogs(
 @Composable
 fun Navigation(
     state: State<NavigationFromResultState>,
-    navigationToFinishScreen: (Int, Int) -> Unit,
+    navigationToFinishScreen: (Int, Int, Boolean) -> Unit,
     level: Int,
     countMoney: Int
 ) {
@@ -254,7 +254,7 @@ fun Navigation(
 
         NavigationFromResultState.Initial -> {}
         NavigationFromResultState.NavigationToFinishScreen -> {
-            navigationToFinishScreen(level, countMoney)
+            navigationToFinishScreen(level, countMoney, false)
         }
     }
 }

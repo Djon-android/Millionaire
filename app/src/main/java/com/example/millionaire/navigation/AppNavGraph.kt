@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.millionaire.utils.Constants.EXTRA_COUNT_MONEY
 import com.example.millionaire.utils.Constants.EXTRA_IS_FINISH_GAME
+import com.example.millionaire.utils.Constants.EXTRA_IS_LOSING
 import com.example.millionaire.utils.Constants.EXTRA_LEVEL
 import com.example.millionaire.utils.Constants.UNKNOWN
 
@@ -21,7 +22,7 @@ fun AppNavGraph(
     gameScreenContent: @Composable () -> Unit,
     recordsScreenContent: @Composable () -> Unit,
     resultScreenContent: @Composable (Boolean, Int, Int) -> Unit,
-    finishGameScreenContent: @Composable (Int, Int) -> Unit
+    finishGameScreenContent: @Composable (Int, Int, Boolean) -> Unit
 ) {
     NavHost(navController = navHostController, startDestination = startDestinationScreen.route) {
         composable(
@@ -166,13 +167,16 @@ fun AppNavGraph(
             )
         }
         composable(
-            route = "${Screen.FinishGameScreen.route}/{$EXTRA_LEVEL}/{$EXTRA_COUNT_MONEY}",
+            route = "${Screen.FinishGameScreen.route}/{$EXTRA_LEVEL}/{$EXTRA_COUNT_MONEY}/{${EXTRA_IS_LOSING}}",
             arguments = listOf(
                 navArgument(EXTRA_LEVEL) {
                     type = NavType.IntType
                 },
                 navArgument(EXTRA_COUNT_MONEY) {
                     type = NavType.IntType
+                },
+                navArgument(EXTRA_IS_LOSING) {
+                    type = NavType.BoolType
                 }
             ),
             enterTransition = {
@@ -198,7 +202,8 @@ fun AppNavGraph(
         ) { backStackEntry ->
             finishGameScreenContent(
                 backStackEntry.arguments?.getInt(EXTRA_LEVEL) ?: UNKNOWN,
-                backStackEntry.arguments?.getInt(EXTRA_COUNT_MONEY) ?: UNKNOWN
+                backStackEntry.arguments?.getInt(EXTRA_COUNT_MONEY) ?: UNKNOWN,
+                backStackEntry.arguments?.getBoolean(EXTRA_IS_LOSING) ?: true
             )
         }
     }
